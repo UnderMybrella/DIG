@@ -1,0 +1,43 @@
+package org.abimon.DIG;
+
+public enum EnumProcessing {
+	NONE,
+	NEWLINE,
+	PRINT,
+	SET_VARIABLE_NAME,
+	SET_VARIABLE_TYPE,
+	SET_VARIABLE_VALUE,
+	GET_VARIABLE,
+	INPUT,
+	START_WHILE,
+	END_INDENT,
+	BREAK,
+	IF,
+	ELSE,
+	ELSEIF,
+	FOR,
+	
+	STRING_LOWER,
+	STRING_UPPER,
+	STRING_TRIM,
+	STRING_SPLIT,
+	STRING_CAST,
+	
+	INT_SUBTRACT,
+	INT_MULTIPLY,
+	INT_CAST,
+	
+	ARRAY_ACCESS,
+	
+	EMPTY,
+	END_CAST,
+	SET_MEMORY_VAR,
+	GET_MEMORY_VAR,
+	PRINT_ACCESS,
+	FREEFORM
+	;
+	
+	public boolean isStringBased(){
+		return this == PRINT;
+	}
+}
