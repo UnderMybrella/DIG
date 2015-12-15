@@ -1,2 +1,45 @@
 # DIG
-DIG (Delegation of Interesting proGrams) is an esoteric programming language that uses images rather than 
+DIG (Delegation of Interesting proGrams) is an esoteric programming language that uses images to execute code.
+
+# Schematic
+
+(R,G,B)
+
+0,0,0-1 OR 255,254,0-255: Set the language to the language defined as 0 or 1 (0 by default is Java, and 1 by default is Python)
+0,0,2: New line
+0,0,3: Print
+0,0,4: Set Variable Name
+0,0,5: Set Variable Type
+0,0,6: Set Variable Value
+0,0,7: Get Variable
+0,0,8: Get User Input (stdin)
+0,0,9: Start While Loop
+0,0,10: End Indentation
+0,0,11: Break
+0,0,12: If condition
+0,0,13: Else
+0,0,14: Else if
+0,1,0-255: ASCII Input
+
+<Logical Conditions>
+1,0,0: True
+1,0,1: False
+1,0,2: AND (&&)
+1,0,3: OR (||)
+1,0,4: Equals (==)
+1,0,5: Less Than (<)
+1,0,6: Less Than or Equal To (<=)
+1,0,7: Greater Than (>)
+1,0,8: Greater Than or Equal To (>=)
+
+
+Values with the red component at 2 are denoted as object methods, and the green component determines the object
+2,0,0: String Lower
+2,0,2: String trim
+2,1,1: Int Subtract
+2,1,3: Int Multiply
+
+
+
+255,255,255: Freeform (Accepts ASCII input and translates that directly to the code)
+
