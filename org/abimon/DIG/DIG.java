@@ -159,13 +159,8 @@ public class DIG {
 					currentProcess = EMPTY;
 				else if(color.getRed() == 255 && color.getGreen() == 255 && color.getBlue() == 1)
 					currentProcess = END_CAST;
-				else if(color.getRed() == 255 && color.getGreen() == 255 && (color.getBlue() >= 220 && color.getBlue() < 230) && (currentVariable != null || currentProcess == SET_VARIABLE_NAME)){
-					tmpVarName = currentVariable.name;
-					currentVariable.name = variableNames[color.getBlue()-220];
-					if(debug)
-						System.out.println(Arrays.toString(variableNames));
-					currentProcess = GET_VARIABLE;
-				}
+				else if(color.getRed() == 255 && color.getGreen() == 255 && (color.getBlue() >= 220 && color.getBlue() < 230) && (currentVariable != null || currentProcess == SET_VARIABLE_NAME))
+					currentProcess = GET_TMP_VAR;
 				else if(color.getRed() == 255 && color.getGreen() == 255 && (color.getBlue() >= 230 && color.getBlue() < 240) && (currentVariable != null || currentProcess == SET_VARIABLE_NAME))
 					currentProcess = SET_MEMORY_VAR;
 				else if(color.getRed() == 255 && color.getGreen() == 255 && (color.getBlue() >= 240 && color.getBlue() < 250) && (currentVariable != null || currentProcess == SET_VARIABLE_NAME)) //Get Variable i
@@ -290,6 +285,14 @@ public class DIG {
 						default:
 							break;
 						}
+					}
+					
+					if(currentProcess == GET_TMP_VAR){
+						tmpVarName = currentVariable.name;
+						currentVariable.name = variableNames[color.getBlue()-220];
+						if(debug)
+							System.out.println(Arrays.toString(variableNames));
+						currentProcess = GET_VARIABLE;
 					}
 
 					String indent = "";

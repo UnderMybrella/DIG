@@ -33,6 +33,7 @@ public enum EnumProcessing {
 	
 	EMPTY,
 	END_CAST,
+	GET_TMP_VAR,
 	SET_MEMORY_VAR,
 	GET_MEMORY_VAR,
 	PRINT_ACCESS,
