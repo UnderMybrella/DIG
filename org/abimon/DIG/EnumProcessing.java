@@ -23,7 +23,9 @@ public enum EnumProcessing {
 	STRING_SPLIT,
 	STRING_CAST,
 	
+	INT_ADD,
 	INT_SUBTRACT,
+	INT_DIVIDE,
 	INT_MULTIPLY,
 	INT_CAST,
 	

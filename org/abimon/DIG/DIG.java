@@ -143,8 +143,12 @@ public class DIG {
 					currentProcess = STRING_SPLIT;
 				else if(color.getRed() == 2 && color.getGreen() == 0 && color.getBlue() == 255)
 					currentProcess = STRING_CAST;
+				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 0)
+					currentProcess = INT_ADD;
 				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 1)
 					currentProcess = INT_SUBTRACT;
+				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 2)
+					currentProcess = INT_DIVIDE;
 				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 3)
 					currentProcess = INT_MULTIPLY;
 				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 255)
@@ -402,8 +406,23 @@ public class DIG {
 						if(previousProcess != GET_VARIABLE)
 							line += "str(";
 						break;
+					case INT_ADD:
+						if(acceptingAsciiInput(color))
+							line += (char) color.getBlue();
+						else
+							line += " + ";
+						break;
 					case INT_SUBTRACT:
-						line += " - ";
+						if(acceptingAsciiInput(color))
+							line += (char) color.getBlue();
+						else
+							line += " - ";
+						break;
+					case INT_DIVIDE:
+						if(acceptingAsciiInput(color))
+							line += (char) color.getBlue();
+						else
+							line += " / ";
 						break;
 					case INT_MULTIPLY:
 						if(acceptingAsciiInput(color))
@@ -535,7 +554,7 @@ public class DIG {
 				return  "(";
 			else if(color.getBlue() == 12)
 				return ") ";
-			
+
 		}
 		return "";
 	}
