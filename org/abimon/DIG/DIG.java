@@ -62,10 +62,11 @@ public class DIG {
 
 	static boolean isOpen = true;
 
+	static File tmp = null;
+
 	public static void runProgram(File program) throws Throwable{
 		HashMap<String, Variable> variableList = new HashMap<String, Variable>();
 		BufferedImage programData = ImageIO.read(transform(program));
-		File tmp = null;
 		PrintStream out = System.out;
 		int language = -1; //0 is Java, 1 is Python
 		String line = "";
@@ -221,8 +222,8 @@ public class DIG {
 								line += ")";
 								line += " + \"";
 							}
-//							else if(variableList.get(currentVariable.name).type == EnumType.INT)
-//								line += ")";
+							//							else if(variableList.get(currentVariable.name).type == EnumType.INT)
+							//								line += ")";
 							if(!tmpVarName.equals("")){
 								currentVariable.name = tmpVarName;
 								tmpVarName = "";
@@ -333,8 +334,8 @@ public class DIG {
 						if(acceptingAsciiInput(color))
 							line += (char) color.getBlue();
 						else if(currentVariable != null){
-//							if(variableList.get(currentVariable.name).type == EnumType.INT)
-//								line += "int(";
+							//							if(variableList.get(currentVariable.name).type == EnumType.INT)
+							//								line += "int(";
 
 							line += currentVariable.name;
 						}
@@ -441,6 +442,13 @@ public class DIG {
 				}
 			}
 		out.close();
+
+		Runtime.getRuntime().addShutdownHook(new Thread(){
+			public void run(){
+				if(!debug)
+					tmp.delete();
+			}
+		});
 
 		if(tmp != null)
 		{
