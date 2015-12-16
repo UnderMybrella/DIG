@@ -527,6 +527,15 @@ public class DIG {
 				return " > "; //Greater Than
 			else if(color.getBlue() == 8)
 				return " >= "; //Greater Than or Equal To
+			else if(color.getBlue() == 9)
+				return " !"; //Not
+			else if(color.getBlue() == 10)
+				return " != ";//Not Equal
+			else if(color.getBlue() == 11)
+				return  "(";
+			else if(color.getBlue() == 12)
+				return ") ";
+			
 		}
 		return "";
 	}
