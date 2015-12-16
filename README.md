@@ -6,4 +6,4 @@ DIG (Delegation of Interesting proGrams) is an esoteric programming language tha
 See (Schematic.txt)
 
 # Running
-java -jar DIG.jar <File> <debug=true:false>
+java -jar DIG.jar [File] [debug=true:false]
