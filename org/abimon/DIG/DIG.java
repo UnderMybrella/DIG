@@ -183,7 +183,7 @@ public class DIG {
 						case PRINT:
 							if(currentProcess == PRINT_ACCESS)
 								break;
-							if(currentProcess != GET_VARIABLE && currentProcess != SET_VARIABLE_NAME && currentProcess != GET_MEMORY_VAR)
+							if(currentProcess != GET_VARIABLE && currentProcess != SET_VARIABLE_NAME && currentProcess != GET_MEMORY_VAR && currentProcess != GET_TMP_VAR)
 								line += "\")";
 							else{
 								line += "\" + ";
@@ -207,11 +207,11 @@ public class DIG {
 						case SET_VARIABLE_VALUE:
 							if(currentVariable != null && variableList.get(currentVariable.name).type == EnumType.STRING){
 								line += "\"";
-								if(currentProcess == INPUT || currentProcess == GET_VARIABLE || currentProcess == SET_VARIABLE_NAME || currentProcess == GET_MEMORY_VAR)
+								if(currentProcess == INPUT || currentProcess == GET_VARIABLE || currentProcess == SET_VARIABLE_NAME || currentProcess == GET_MEMORY_VAR || currentProcess == GET_TMP_VAR)
 									line += " + ";
 							}
 							else if(currentVariable != null && variableList.get(currentVariable.name).type == EnumType.INT)
-								if(currentProcess == INPUT || currentProcess == GET_VARIABLE || currentProcess == SET_VARIABLE_NAME || currentProcess == GET_MEMORY_VAR);
+								if(currentProcess == INPUT || currentProcess == GET_VARIABLE || currentProcess == SET_VARIABLE_NAME || currentProcess == GET_MEMORY_VAR || currentProcess == GET_TMP_VAR);
 								else
 									line += ")";
 							break;
@@ -232,7 +232,7 @@ public class DIG {
 							//								line += ")";
 							break;
 						case INPUT:
-							if(currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR)
+							if(currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR || currentProcess == GET_TMP_VAR)
 								line += "\")";
 							else
 								line += "\" + ";
@@ -241,25 +241,25 @@ public class DIG {
 								line += ")";
 							break;
 						case START_WHILE:
-							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR){
+							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR || currentProcess == GET_TMP_VAR){
 								line += ":";
 								indentation++;
 							}
 							break;
 						case IF:
-							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR){
+							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR || currentProcess == GET_TMP_VAR){
 								line += ":";
 								indentation++;
 							}
 							break;
 						case ELSE:
-							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR){
+							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR || currentProcess == GET_TMP_VAR){
 								line += ":";
 								indentation++;
 							}
 							break;
 						case ELSEIF:
-							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR){
+							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR || currentProcess == GET_TMP_VAR){
 								line += ":";
 								indentation++;
 							}
