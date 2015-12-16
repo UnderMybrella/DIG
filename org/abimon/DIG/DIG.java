@@ -63,12 +63,13 @@ public class DIG {
 	static boolean isOpen = true;
 
 	static File tmp = null;
+	static int language = -1;
 
 	public static void runProgram(File program) throws Throwable{
 		HashMap<String, Variable> variableList = new HashMap<String, Variable>();
 		BufferedImage programData = ImageIO.read(transform(program));
 		PrintStream out = System.out;
-		int language = -1; //0 is Java, 1 is Python
+		language = -1; //0 is Java, 1 is Python
 		String line = "";
 		EnumProcessing currentProcess = NONE;
 		EnumProcessing previousProcess = NONE;
@@ -151,6 +152,8 @@ public class DIG {
 					currentProcess = INT_DIVIDE;
 				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 3)
 					currentProcess = INT_MULTIPLY;
+				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 4)
+					currentProcess = INT_MODULO;
 				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 255)
 					currentProcess = INT_CAST;
 				else if(color.getRed() == 2 && color.getGreen() == 2 && color.getBlue() == 0)
@@ -159,6 +162,8 @@ public class DIG {
 					currentProcess = EMPTY;
 				else if(color.getRed() == 255 && color.getGreen() == 255 && color.getBlue() == 1)
 					currentProcess = END_CAST;
+				else if(color.getRed() == 255 && color.getGreen() == 255 && color.getBlue() == 2)
+					currentProcess = RANGE;
 				else if(color.getRed() == 255 && color.getGreen() == 255 && (color.getBlue() >= 220 && color.getBlue() < 230) && (currentVariable != null || currentProcess == SET_VARIABLE_NAME))
 					currentProcess = GET_TMP_VAR;
 				else if(color.getRed() == 255 && color.getGreen() == 255 && (color.getBlue() >= 230 && color.getBlue() < 240) && (currentVariable != null || currentProcess == SET_VARIABLE_NAME))
@@ -277,6 +282,10 @@ public class DIG {
 							break;
 						case ARRAY_ACCESS:
 							line += "]";
+							break;
+						case RANGE:
+							if(currentProcess == FOR)
+								line += ")";
 							break;
 						case PRINT_ACCESS:
 							line += " + \"";
@@ -433,6 +442,12 @@ public class DIG {
 						else
 							line += " * ";
 						break;
+					case INT_MODULO:
+						if(acceptingAsciiInput(color))
+							line += (char) color.getBlue();
+						else
+							line += " % ";
+						break;
 					case END_CAST:
 						line += ")";
 						break;
@@ -441,6 +456,14 @@ public class DIG {
 							line += (char) color.getBlue();
 						else
 							line += "[";
+						break;
+					case RANGE:
+						if(acceptingAsciiInput(color))
+							line += (char) color.getBlue();
+						else if(!line.contains("range("))
+							line += "range(";
+						else
+							line += ",";
 						break;
 					case SET_MEMORY_VAR:
 						variableNames[color.getBlue()-230] = currentVariable.name;
@@ -530,6 +553,7 @@ public class DIG {
 	}
 
 	public static String logicalConditions(Color color){
+		System.out.println(language);
 		if(color.getRed() == 1 && color.getGreen() == 0){
 			if(color.getBlue() == 0)
 				return "True";
