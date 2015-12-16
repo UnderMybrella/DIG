@@ -136,28 +136,38 @@ public class DIG {
 							currentProcess = FOR;
 					}
 				}
-				else if(color.getRed() == 2 && color.getGreen() == 0 && color.getBlue() == 0)
-					currentProcess = STRING_LOWER;
-				else if(color.getRed() == 2 && color.getGreen() == 0 && color.getBlue() == 2)
-					currentProcess = STRING_TRIM;
-				else if(color.getRed() == 2 && color.getGreen() == 0 && color.getBlue() == 3)
-					currentProcess = STRING_SPLIT;
-				else if(color.getRed() == 2 && color.getGreen() == 0 && color.getBlue() == 255)
-					currentProcess = STRING_CAST;
-				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 0)
-					currentProcess = INT_ADD;
-				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 1)
-					currentProcess = INT_SUBTRACT;
-				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 2)
-					currentProcess = INT_DIVIDE;
-				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 3)
-					currentProcess = INT_MULTIPLY;
-				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 4)
-					currentProcess = INT_MODULO;
-				else if(color.getRed() == 2 && color.getGreen() == 1 && color.getBlue() == 255)
-					currentProcess = INT_CAST;
-				else if(color.getRed() == 2 && color.getGreen() == 2 && color.getBlue() == 0)
-					currentProcess = ARRAY_ACCESS;
+				else if(color.getRed() == 2){
+					if(color.getGreen() == 0){
+						if(color.getBlue() == 0)
+							currentProcess = STRING_LOWER;
+						else if(color.getBlue() == 2)
+							currentProcess = STRING_TRIM;
+						else if(color.getBlue() == 3)
+							currentProcess = STRING_SPLIT;
+						else if(color.getBlue() == 4)
+							currentProcess = STRING_LENGTH;
+						else if(color.getBlue() == 255)
+							currentProcess = STRING_CAST;
+					}
+					else if(color.getGreen() == 1){
+						if(color.getBlue() == 0)
+							currentProcess = INT_ADD;
+						else if(color.getBlue() == 1)
+							currentProcess = INT_SUBTRACT;
+						else if(color.getBlue() == 2)
+							currentProcess = INT_DIVIDE;
+						else if(color.getBlue() == 3)
+							currentProcess = INT_MULTIPLY;
+						else if(color.getBlue() == 4)
+							currentProcess = INT_MODULO;
+						else if(color.getBlue() == 255)
+							currentProcess = INT_CAST;
+					}
+					else if(color.getGreen() == 2){
+							if(color.getBlue() == 0)
+								currentProcess = ARRAY_ACCESS;
+					}
+				}
 				else if(color.getRed() == 255 && color.getGreen() == 255 && color.getBlue() == 0)
 					currentProcess = EMPTY;
 				else if(color.getRed() == 255 && color.getGreen() == 255 && color.getBlue() == 1)
@@ -295,7 +305,7 @@ public class DIG {
 							break;
 						}
 					}
-					
+
 					if(currentProcess == GET_TMP_VAR){
 						tmpVarName = currentVariable.name;
 						currentVariable.name = variableNames[color.getBlue()-220];
@@ -413,6 +423,12 @@ public class DIG {
 							line += (char) color.getBlue();
 						else
 							line += ".split(";
+						break;
+					case STRING_LENGTH:
+						if(acceptingAsciiInput(color))
+							line += (char) color.getBlue();
+						else
+							line += ".length()";
 						break;
 					case STRING_CAST:
 						if(previousProcess != GET_VARIABLE)

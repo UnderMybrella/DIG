@@ -21,6 +21,7 @@ public enum EnumProcessing {
 	STRING_UPPER,
 	STRING_TRIM,
 	STRING_SPLIT,
+	STRING_LENGTH,
 	STRING_CAST,
 	
 	INT_ADD,
