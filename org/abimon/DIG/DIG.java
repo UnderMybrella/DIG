@@ -207,7 +207,7 @@ public class DIG {
 						case SET_VARIABLE_VALUE:
 							if(currentVariable != null && variableList.get(currentVariable.name).type == EnumType.STRING){
 								line += "\"";
-								if(currentProcess == INPUT || currentProcess == GET_VARIABLE || currentProcess == SET_VARIABLE_NAME || currentProcess == GET_MEMORY_VAR || currentProcess == GET_TMP_VAR)
+								if(currentProcess == INPUT || currentProcess == GET_VARIABLE || currentProcess == SET_VARIABLE_NAME || currentProcess == GET_MEMORY_VAR || currentProcess == GET_TMP_VAR || currentProcess == STRING_CAST)
 									line += " + ";
 							}
 							else if(currentVariable != null && variableList.get(currentVariable.name).type == EnumType.INT)
