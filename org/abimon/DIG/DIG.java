@@ -241,25 +241,25 @@ public class DIG {
 								line += ")";
 							break;
 						case START_WHILE:
-							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR || currentProcess == GET_TMP_VAR){
+							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR && currentProcess != GET_TMP_VAR){
 								line += ":";
 								indentation++;
 							}
 							break;
 						case IF:
-							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR || currentProcess == GET_TMP_VAR){
+							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR && currentProcess != GET_TMP_VAR){
 								line += ":";
 								indentation++;
 							}
 							break;
 						case ELSE:
-							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR || currentProcess == GET_TMP_VAR){
+							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR && currentProcess != GET_TMP_VAR){
 								line += ":";
 								indentation++;
 							}
 							break;
 						case ELSEIF:
-							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR || currentProcess == GET_TMP_VAR){
+							if(color.getRed() != 2 && currentProcess != GET_VARIABLE && currentProcess != GET_MEMORY_VAR && currentProcess != GET_TMP_VAR){
 								line += ":";
 								indentation++;
 							}
