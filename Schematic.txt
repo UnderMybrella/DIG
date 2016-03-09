@@ -14,6 +14,7 @@
 0,0,12: If condition
 0,0,13: Else
 0,0,14: Else if
+0,0,15: For
 0,1,0-255: ASCII Input
 
 <Logical Conditions>
